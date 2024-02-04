@@ -40,7 +40,7 @@ class Animal {
   }
   
   // Subclass for vertebrates
-  class Vertebrate extends Animal {
+  class WithBackBone extends Animal {
     constructor(name, habitat, lifespan) {
       super(name, habitat, lifespan);
       // Vertebrates have a backbone
@@ -63,8 +63,8 @@ class Animal {
     }
   }
   
-  // Subclass for invertebrates
-  class Invertebrate extends Animal {
+  // Subclass for invertebrates, ANIMAL WITHOUT BACK BONE IS CALLED INVERTEBRATE
+  class WithoutBackBone extends Animal {
     constructor(name, habitat, lifespan) {
       super(name, habitat, lifespan);
       // Invertebrates do not have a backbone
@@ -88,7 +88,7 @@ class Animal {
   }
   
   // Subclass for arthropods
-  class Arthropoda extends Invertebrate {
+  class Arthropoda extends WithoutBackBone {
     constructor(name, habitat, lifespan, numberOfLegs) {
       super(name, habitat, lifespan);
       // Additional property for arthropods
@@ -111,8 +111,8 @@ class Animal {
     }
   }
   
-  // Subclass for fish
-  class Fish extends Vertebrate {
+  // Subclass for fish, AMIMAL WITH BACKBONE IS CALLED VERTEBRATE
+  class Fish extends WithBackBone {
     constructor(name, habitat, lifespan, waterType) {
       super(name, habitat, lifespan);
       // Additional property for fish
@@ -136,7 +136,7 @@ class Animal {
   }
   
   // Subclass for amphibians
-  class Amphibia extends Vertebrate {
+  class Amphibia extends WithBackBone {
     constructor(name, habitat, lifespan) {
       super(name, habitat, lifespan);
     }
@@ -153,7 +153,7 @@ class Animal {
   }
   
   // Subclass for reptiles
-  class Reptile extends Vertebrate {
+  class Reptile extends WithBackBone {
     constructor(name, habitat, lifespan) {
       super(name, habitat, lifespan);
     }
@@ -170,7 +170,7 @@ class Animal {
   }
   
   // Subclass for birds (Aves)
-  class Aves extends Vertebrate {
+  class Aves extends WithBackBone {
     constructor(name, habitat, lifespan, canFly) {
       super(name, habitat, lifespan);
       // Additional property for birds
@@ -194,11 +194,13 @@ class Animal {
   }
   
   // Subclass for mammals
-  class Mammal extends Vertebrate {
-    constructor(name, habitat, lifespan, mammalType) {
+  class Mammal extends WithBackBone {
+    constructor(name, habitat, lifespan, mammalType, isWarmBlooded) {
       super(name, habitat, lifespan);
       // Additional property for mammals
       this._mammalType = mammalType;
+      // Additional property to determine if the mammal is warm-blooded
+      this._isWarmBlooded = isWarmBlooded;
     }
   
     // Polymorphism - overriding the makeSound method
@@ -213,16 +215,25 @@ class Animal {
       return `Mammal Type: ${this._mammalType}`;
     }
   
+    // Public method to display warm-blooded information
+    displayWarmBlooded() {
+      return `Is Warm-Blooded: ${this._isWarmBlooded ? 'Yes' : 'No'}`;
+    }
+  
     // Overriding move method for mammals
     move() {
       return 'The mammal walks or runs.';
     }
   }
   
-  // Example usage:
+             // Example usage:
   
-  // Creating an instance of the Mammal class
-  const dog = new Mammal('Dog', 'Land', 12, 'Domestic');
+  // Creating instances of subclasses
+  const dog = new Mammal('Dog', 'Land', 12, 'Domestic', true);
+  const goldfish = new Fish('GoldFish','Water',15,'Freshwater');
+  const butterfly = new Arthropoda('Butterfly','Air','2 weeks',6 );
+  const snake = new Reptile('Snake', 'Land', 20);
+  const eagle = new Aves('Eagle', 'Sky', 25, true);
   
   // Logging information to the console
   console.log(dog.displayName());
@@ -230,5 +241,30 @@ class Animal {
   console.log(dog.displayLifespan());
   console.log(dog.move());
   console.log(dog.displayMammalType());
-  console.log(dog.displayVertebrateType()); // Calls the private method in the Animal class
+  console.log(dog.displayWarmBlooded());
+  
+  console.log(goldfish.displayName());
+  console.log(goldfish.displayHabitat());
+  console.log(goldfish.displayLifespan());
+  console.log(goldfish.move());
+  console.log(goldfish.displayVertebrateType());
+  
+  console.log(butterfly.displayName());
+  console.log(butterfly.displayHabitat());
+  console.log(butterfly.displayLifespan());
+  console.log(butterfly.move());
+  console.log(butterfly.displayInvertebrateType());
+  
+  console.log(snake.displayName());
+  console.log(snake.displayHabitat());
+  console.log(snake.displayLifespan());
+  console.log(snake.move());
+  console.log(snake.displayVertebrateType());
+  
+  console.log(eagle.displayName());
+  console.log(eagle.displayHabitat());
+  console.log(eagle.displayLifespan());
+  console.log(eagle.move());
+  console.log(eagle.displayVertebrateType());
+  console.log(eagle.displayFlightCapability());
   
