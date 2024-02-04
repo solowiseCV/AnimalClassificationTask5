@@ -1,12 +1,15 @@
 // Base class - Animal
 class Animal {
-    constructor(name, habitat, lifespan) {
+  constructor(name,habitat,lifespan){
+   if(this.constructor === Animal){
+     throw new Error("You cant instatiate this class directly...")
+   }
       // Private properties
       this._name = name;
       this._habitat = habitat;
       this._lifespan = lifespan;
+    
     }
-  
     // Public method for displaying the animal's name
     displayName() {
       return `Animal: ${this._name}`;
